@@ -1,0 +1,69 @@
+<div class="modal" id="AdminModal" data-backdrop="static" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{flags.isEdit?'Edit':'Add'}} Branches</h5>
+        </div>
+        <div class="modal-body">
+          <form #subAdminForm="ngForm">
+            <!-- <div class="form-group">
+              <label>Image</label><br>
+              <input type="file" (change)="onImageSelect($event)" id="subCategoryFile" accept=".png, .jpg, .jpeg">
+              <div *ngIf="src">
+                <img src="{{src}}" width="100px" height="100px">
+                             <p><a href="javascript:void(0)" (click)="onImageRemove()">Remove</a></p>
+              </div>
+            </div> -->
+           
+            <div class="form-group">
+              <label>Name</label>
+              <input type="text" class="form-control" maxlength="50" [(ngModel)]="body.name" name="name" required />
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" name="email" maxlength="50"
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" [(ngModel)]="body.email"
+              class="form-control" required /> 
+             </div>
+            <div *ngIf="!flags.isEdit" class="form-group">
+              <label>Password</label>
+              <input type="text" class="form-control" name="discount" [(ngModel)]="body.password" />
+            </div>
+            <!-- <div class="form-group">
+              <label>Geofence Name</label>
+              <select name="fence" class="form-control" [(ngModel)]="body.fence" required>
+                <option value="">--Select Geofence--</option>
+                <option *ngFor="let list of fenceList" value="{{list._id}}">{{list.name}}</option>
+              </select>
+             </div> -->
+
+             <!-- <div class="form-group">
+              <label>Address</label>           
+                <input ngx-google-places-autocomplete [options]="{
+                    types: [],
+                    componentRestrictions: { country: 'IN' }
+                    }"  name="address" [(ngModel)]="body.address" class="form-control" placeholder="Address"
+                 #placesRef="ngx-places"  (onAddressChange)="handleAddressChange($event)"/>          
+             </div> -->
+             
+              <div class="form-group">
+                  <label>Location</label>
+                  <input type="text" #search class="form-control" name='address' (keydown.enter)="$event.preventDefault()" [(ngModel)]="body.address" placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search required>  
+    
+              </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button *ngIf="!flags.isEdit" type="button" class="btn btn-primary"
+            [disabled]="!subAdminForm.valid || flags.isAdded"
+            (click)="addSubAdmin()">{{flags.isAdded?'Saving...':'Save'}}</button>
+          <button *ngIf="flags.isEdit" type="button" class="btn btn-primary"
+            [disabled]="!subAdminForm.valid || flags.isUpdate"
+            (click)="editSubAdmin()">{{flags.isUpdate?'Updating...':'Update'}}</button>
+          <button type="button" class="btn btn-secondary" (click)="onCancel()" id="closeSubAdminModal"
+            data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <input type="hidden" id="openSubAdminModal" data-target="#AdminModal" data-toggle="modal">

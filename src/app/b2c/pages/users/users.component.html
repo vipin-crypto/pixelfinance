@@ -1,0 +1,71 @@
+<div class="container-fluid">
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <div class="row">
+                <div class="col-md-1">
+                    <h6 class="m-0 font-weight-bold text-primary">Expanses</h6>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" name="search" [(ngModel)]="selectUser"
+                        placeholder="Search User">
+                </div>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-primary pl-4 pr-4" (click)="searchUser()">Search</button>
+                    <button type="reset" class="btn btn-primary pl-4 pr-4 ml-2" (click)="reset()">Reset</button>
+                </div>
+                <div class="col-md-4 text-right d-flex" *ngIf="role == Admin">     
+                    <button type="reset" class="btn btn-primary pl-4 pr-4 ml-4" routerLink="/b2c/users/add-user" >Add Expanses</button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Type</th>
+                            <th>Decscription</th>
+                            <!-- <th>Username</th> -->
+                            <th>Price</th>
+                            <th>DateTime</th>
+                            <th>Branches</th>
+                            <th [width]="'10%'">Action</th>
+                            <!-- <th [width]="'10%'">Action</th> -->
+                        </tr>
+                    </thead>
+                    <div class="progress-loader" [hidden]="!loading">
+                        <mat-progress-spinner class="spinner" [color]="color" mode="indeterminate">
+                        </mat-progress-spinner>
+                    </div>
+                    <tbody>
+                        <tr *ngFor="let item of expansestotal">
+                            <td>1</td>
+                            <td>{{item.type}}
+                            </td>
+                            <td>{{item.description}}</td>
+                            <!-- <td>{{item.userName}}</td> -->
+                            <td>{{item.price}}₹</td>
+                            <td>{{item.createdAt  | date:'short'}} </td>
+                            <td>mohali</td>
+                            <td class="action" >
+                                <div class="d-flex">
+                                    <button   class="btn btn-primary mr-1 "
+                                    (click)="gotoUpdate(item._id)" ><span
+                                            class="fas fa-fw fa-edit" ></span></button>
+                                    <button class="btn btn-danger" (click)="deleteUser()"><span
+                                            class="fas fa-fw fa-trash"></span></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h4 *ngIf="false" class="text-center">No records found.</h4>
+            </div>
+            <pagination [totalItems]="totalItems" [maxSize]="05" [boundaryLinks]="true" [(ngModel)]="currentPage"
+                (pageChanged)="onPageChange($event)"></pagination>
+        </div>
+    </div>
+</div>
+<app-user-modal [deliveryAddress]="delAddress"></app-user-modal>

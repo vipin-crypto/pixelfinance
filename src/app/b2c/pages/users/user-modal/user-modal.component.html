@@ -1,0 +1,131 @@
+<div class="modal" id="userAddressModal" data-backdrop="static" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delivery Address</h5>
+      </div>
+      <div class="modal-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Road Name, Area, Colony*</th>
+                <th>House No. Building Name*</th>
+                <th>Address Type</th>
+                <th>Area</th>
+                <th>Block</th>
+                <th>Landmark</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let address of deliveryAddress;let i=index">
+                <td>{{i + serialNumber + 1 }}</td>
+                <td>{{address.name}}</td>
+                <td>{{address.address1}}</td>
+                <td>{{address.address2}}</td>
+                <td>{{address.address3}}</td>
+                <td>{{address.addressType}}</td>
+                <td>{{address.area}}</td>
+                <td>{{address.block}}</td>
+                <td>{{address.landmark}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4 *ngIf="!deliveryAddress?.length" class="text-center">No Address found.</h4>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--address Infomation-->
+
+<div class="modal" id="deliveryAddressModal" data-backdrop="static" tabindex="-1" role="dialog">
+  <div class="modal-dialog1" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delivery Address</h5>
+      </div>
+      <div *ngIf="deliveryAddress1" class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Address</label>
+              <textarea type="text" class="form-control" rows="4" readonly>{{deliveryAddress1.address1}}</textarea>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Road Name,Area,Colony*</label>
+              <input type="text" class="form-control" [value]="deliveryAddress1.address2" readonly>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>House No. Building Name*</label>
+              <input type="text" class="form-control" [value]="deliveryAddress1.address3" readonly>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Country</label>
+              <input type="text" class="form-control" [value]="deliveryAddress.country" readonly>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>State</label>
+              <input type="text" class="form-control" [value]="deliveryAddress.state" readonly>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>City</label>
+              <input type="text" class="form-control" [value]="deliveryAddress.city" readonly>
+            </div>
+          </div>
+        </div> -->
+        <div class="row">
+          <!-- <div class="col-md-6">
+            <div class="form-group">
+              <label>Landmark</label>
+              <input type="text" class="form-control" [value]="deliveryAddress.landmark" readonly>
+            </div>
+          </div> -->
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Block</label>
+              <input type="text" class="form-control" [value]="deliveryAddress1.block" readonly>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Area</label>
+              <input type="text" class="form-control" [value]="deliveryAddress1.area" readonly>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Address Type</label>
+              <input type="text" class="form-control" [value]="deliveryAddress1.addressType" readonly>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+  

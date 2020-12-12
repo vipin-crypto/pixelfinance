@@ -1,0 +1,62 @@
+<div class="container-fluid">
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <div class="row">
+                <div class="col-md-6">
+                    <h6 class="m-0 font-weight-bold text-primary">Branches</h6>
+                </div>
+                <div class="col-md-6 text-right">
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#AdminModal"><span
+                            class="fas fa-plus mr-1"></span>Add</button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Address</th>
+                            <th>Block</th>
+                            <th [width]="'10%'">Action</th>
+                        </tr>
+                    </thead>
+                    <!-- <div class="progress-loader" [hidden]="!loading">
+                        <mat-progress-spinner class="spinner" [color]="color" mode="indeterminate">
+                        </mat-progress-spinner>
+                    </div> -->
+                    <tbody>
+                        <tr *ngFor="let branch of branchesList; let i= index">
+                            <td>{{i+1}}</td>
+                            <td>{{branch.name}}</td>
+                            <td>{{branch.email}}</td>
+                            <td>{{branch.address}}</td>
+                            <td>
+                                <ui-switch labelOn="ON" switchColor="#4e73df" id="topDeals" name="isComplete"
+                                     (change)="approveSubAdmin()" labelOff="OFF"></ui-switch>
+                            </td>
+
+                            <td class="action">
+                                <div class="d-flex">
+                                    <button class="btn btn-primary mr-1 " (click)="modal.onEditSelect()"
+                                        ><span
+                                            class="fas fa-fw fa-edit"></span></button>
+                                    <button class="btn btn-danger" (click)="deleteSubAdmin()"><span
+                                            class="fas fa-fw fa-trash"></span></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- <h4 *ngIf="!subAdminList?.length" class="text-center">No records found.</h4> -->
+            </div>
+            <pagination [totalItems]="totalItems" [maxSize]="05" [boundaryLinks]="true" [(ngModel)]="currentPage"
+                (pageChanged)="onPageChange($event)"></pagination>
+        </div>
+    </div>
+</div>
+<app-admin-modal (onAddEdit)="getallAdmin()" ></app-admin-modal>

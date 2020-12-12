@@ -1,0 +1,80 @@
+<div class="container-fluid">
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <div class="row">
+                <div class="col-md-6">
+                    <h6 class="m-0 font-weight-bold text-primary">ORDER HISTORY</h6>
+                </div>
+                <div class="col-md-6 text-right">
+                    <button class="btn btn-primary" (click)="history.back()"><span
+                            class="fas fa-arrow-left"></span> Back</button>
+                </div>
+                <!-- <div class="col-md-3">
+                    <input type="text" class="form-control" name="search" [(ngModel)]="selectUser"
+                        placeholder="Search User">
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-primary pl-4 pr-4" (click)="searchUser()">Search</button>
+                    <button type="reset" class="btn btn-primary pl-4 pr-4 ml-2" (click)="reset()">Reset</button>
+                </div> -->
+                <!-- <div class="col-md-5 text-right d-flex">     
+                    <select style="width:40%" name="type" [(ngModel)]="userType" (change)="getTypeUser()"
+                    class="form-control">
+                    <option value="" selected>--All User--</option>
+                    <option value="newUsers">New Users</option>
+                    <option value="frequent">Frequent Users</option>   
+                    </select>
+       
+                    <button class="btn btn-primary ml-2" (click)="generateUsercsv()"><span class="fa fa-download"></span> Download CSV</button>
+                </div> -->
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Order Id</th>
+                            <!-- <th>Transaction Id</th>                        -->
+                            <!-- <th>Status</th> -->
+                            <th>Tax</th>
+                            <th>Promo Code</th>
+                            <th>Total Amount</th>
+                            <th>Payment Type</th>                          
+                            <th>Delivery Address</th>  
+                            <th>Delivery Notes</th>                        
+                            <!-- <th [width]="'10%'">Action</th> -->
+                        </tr>
+                    </thead>
+                    <div class="progress-loader" [hidden]="!loading">
+                        <mat-progress-spinner class="spinner" [color]="color" mode="indeterminate">
+                        </mat-progress-spinner>
+                    </div>
+                    <tbody>
+                        <tr *ngFor="let item of userOrderList; let i = index">
+                            <td>{{i + serialNumber + 1}}</td>
+                            <td>{{item.orderId}}</td>
+                            <!-- <td>{{item.transactionId}}</td> -->
+                            <!-- <td>{{item.status}}</td> -->
+                            <td>{{item.tax || 'N/A'}}</td>
+                            <td>{{item.promoCode || 'N/A'}}</td>
+                            <td>{{item.totalAmount}}</td>
+                            <td>{{item.paymentType}}</td>
+                            <td (click)="delAddress=item.deliveryAddress">
+                                <button class="btn btn-primary" data-toggle="modal" data-target="#deliveryAddressModal">
+                                    <span class="fas fa-eye"></span></button>
+                            </td>
+                            <td>{{item.deliveryNotes}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h4 *ngIf="!userOrderList?.length" class="text-center">No records found.</h4>
+            </div>
+            <!-- <pagination [totalItems]="totalItems" [maxSize]="05" [boundaryLinks]="true" [(ngModel)]="currentPage"
+                (pageChanged)="onPageChange($event)"></pagination> -->
+        </div>
+    </div>
+</div>
+<app-user-modal [deliveryAddress1]="delAddress"></app-user-modal>

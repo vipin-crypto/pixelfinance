@@ -1,0 +1,203 @@
+<div class="container-fluid">
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <div class="row">
+                <div class="col-md-6">
+                    <h6 class="m-0 font-weight-bold text-primary">TRANSACTION ORDERS</h6>
+                </div>
+                <div class="col-md-6 text-right">
+                    <button class="btn btn-primary" (click)="history.back()"><span class="fas fa-arrow-left"></span>
+                        Back</button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div *ngIf="transOrderList.length" class="row">
+                <div class="col-md-8">
+                    <h6 class="mt-3" style="font-weight: 800;">Delivery Address</h6>
+                    <button class="btn btn-primary ml-4" data-toggle="modal" data-target="#deliveryAddressModal"
+                    (click)="selectedAddress = transOrderList[0].deliveryAddress"><span
+                        class="fas fa-eye"></span></button>
+                </div>
+                
+                <div class="col-md-4 mt-4" *ngIf="role.type=='SubAdmin'|| role.type=='Admin' || role.type=='Vendor'">
+                    <div  *ngIf="globalStatus" class="product_action">
+                        <div *ngIf="globalStatus == 'Packing'|| globalStatus == 'Shipped' || globalStatus=='ReSchedule' ">
+                            <button *ngIf="driver && role.type!='Vendor'" class="btn btn-primary mr-1" data-toggle="modal"
+                                data-target="#driverModals" (click)="requestId = transId">Assign</button>
+                            <button *ngIf="!driver" class="btn btn-primary mr-1" data-toggle="modal"
+                                data-target="#driverDetailsModal"
+                                (click)="selectedDriver = transOrderList[0].driver"><span
+                                    class="fas fa-eye"></span></button>
+                        </div>
+                        <button *ngIf="globalStatus == 'New'" class="btn btn-primary mr-1"
+                            (click)="ProcessAllOrder(transId,'Accepted')">Accepted</button>
+                        <button *ngIf="globalStatus == 'Accepted'"
+                            (click)="ProcessAllOrder(transId, 'Packing')"
+                            class="btn btn-primary mr-1">Packing</button>
+                        <button *ngIf="globalStatus == 'Packing' || globalStatus=='ReSchedule'" (click)="ProcessAllOrderShipped(transOrderList,'Shipped')"
+                            class="btn btn-primary mr-1">Shipped</button>
+                        <button *ngIf="globalStatus == 'Shipped'"
+                            (click)="ProcessAllOrder(transId, 'Delivered')"
+                            class="btn btn-primary mr-1">Delivered</button>
+                        <button *ngIf="globalStatus == 'Canceled'" class="btn btn-danger mr-1"
+                            disabled>Canceled</button>
+                        <button
+                            *ngIf="globalStatus != 'Shipped' && globalStatus != 'Delivered' && globalStatus != 'Rejected' && globalStatus != 'Canceled'"
+                            class="btn btn-danger"
+                            (click)="ProcessAllOrder(transId, 'Rejected')">Reject</button>
+
+                        <button *ngIf="globalStatus == 'Rejected'" class="btn btn-danger"
+                            disabled>Rejected</button>
+                        <button *ngIf="globalStatus == 'Delivered'" class="btn btn-success"
+                            disabled>Delivered</button>
+                    </div>                   
+               </div>    
+            </div>
+
+            <div class="table-responsive mt-3">
+                <table class="table table-bordered" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                           
+                            <th>Product Name</th>
+                            <th>Note</th>
+                            <th>Pack</th>
+                            <th>Quantity</th>
+                            <!-- <th>Delivery Address</th> -->
+                            <th>Product Detail</th>
+                            <th>Status</th>                  
+                            <th>Total Amount</th>
+                            <th>Delivery Time</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <div class="progress-loader" [hidden]="!loading">
+                        <mat-progress-spinner class="spinner" [color]="color" mode="indeterminate">
+                        </mat-progress-spinner>
+                    </div>
+                    <tbody *ngIf="transOrderList">
+                        <tr *ngFor="let item of transOrderList; let i = index">
+                            <td>{{i + serialNumber + 1}}</td>
+                            <td>{{item.productId.name}}</td>
+                            <td>{{item.productId.note || 'N/A'}}</td>
+                            <td>
+                                <button class="btn btn-primary" data-toggle="modal" data-target="#packModal"
+                                    (click)="selectedPack = item.pack">
+                                    <span class="fas fa-eye"></span>
+                                </button>
+                            </td>
+                            <td>{{item.quantity}}</td>
+                            <!-- <td >
+                                <button class="btn btn-primary" data-toggle="modal" data-target="#deliveryAddressModal"
+                                    (click)="selectedAddress = item.deliveryAddress"><span
+                                        class="fas fa-eye"></span></button>
+                            </td> -->
+                            <td>
+                                <button class="btn btn-primary" data-toggle="modal" data-target="#productInfoModal"
+                                    (click)="selectedProduct = item.productId"><span class="fas fa-eye"></span></button>
+                            </td>
+                           
+                            <td class="text-center"><span class="badge badge-info">{{item.status}}</span></td>
+                           
+                            <td>{{item.totalAmount | number : '1.0-0'}}</td>
+                            <td *ngIf="item.timeSlots.length">
+                                <li *ngFor="let slots of item.timeSlots">
+                                   <span class="badge badge-info">{{slots.time}}</span>
+                                </li>
+                            </td>
+                             <td *ngIf="!item.timeSlots.length"><span class="badge badge-info">{{item.deliveryTime}}</span></td>
+
+                            <!-- <span *ngIf="item.status != 'Shipped' && item.status != 'Delivered' && item.status != 'Packing'" class="badge badge-info">Order in progress</span>
+                    <div *ngIf="item.status == 'Shipped' || item.status == 'Delivered' || item.status == 'Packing'">
+                      <button *ngIf="!item.driver" class="btn btn-primary" data-toggle="modal" data-target="#openAssignModal" (click)="requestId = item._id">Assign</button>
+                      <button *ngIf="item.driver" class="btn btn-primary" data-toggle="modal" data-target="#driverDetailsModal" (click)="selectedDriver = item.driver"><span class="fas fa-eye"></span></button>
+                    </div>-->
+                    <ng-container *ngIf="role.type=='SubAdmin' && item.productId.vendorId!=null">
+                        <td>
+                            <div class="product_action">
+                                <div *ngIf="item.status == 'Packing'|| item.status == 'Shipped' || item.status=='ReSchedule' ">
+                                    <button *ngIf="!item.driver" class="btn btn-primary mr-1" data-toggle="modal"
+                                        data-target="#driverModal" (click)="requestId = item._id">Assign</button>
+                                    <button *ngIf="item.driver" class="btn btn-primary mr-1" data-toggle="modal"
+                                        data-target="#driverDetailsModal"
+                                        (click)="selectedDriver = item.driver"><span
+                                            class="fas fa-eye"></span></button>
+                                </div>
+                                <button *ngIf="item.status == 'New'" class="btn btn-primary mr-1"
+                                    (click)="processOrder(item._id,'Accepted')" disabled>Accepted</button>
+                                <button *ngIf="item.status == 'Accepted'"
+                                    (click)="processOrder(item._id, 'Packing')"
+                                    class="btn btn-primary mr-1" disabled>Packing</button>
+                                <button *ngIf="item.status == 'Packing' || item.status=='ReSchedule'" (click)="processOrder(item._id, 'Shipped')"
+                                    class="btn btn-primary mr-1" disabled>Shipped</button>
+                                <button *ngIf="item.status == 'Shipped'"
+                                    (click)="processOrder(item._id, 'Delivered')"
+                                    class="btn btn-primary mr-1" disabled>Delivered</button>
+                                <button *ngIf="item.status == 'Canceled'" class="btn btn-danger mr-1"
+                                    disabled>Canceled</button>
+                                <button
+                                    *ngIf="item.status != 'Shipped' && item.status != 'Delivered' && item.status != 'Rejected' && item.status != 'Canceled'"
+                                    class="btn btn-danger"
+                                    (click)="processOrder(item._id, 'Rejected')">Reject</button>
+
+                                <button *ngIf="item.status == 'Rejected'" class="btn btn-danger"
+                                    disabled>Rejected</button>
+                                <button *ngIf="item.status == 'Delivered'" class="btn btn-success"
+                                    disabled>Delivered</button>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <ng-container *ngIf="role.type=='Admin' || role.type=='Vendor' || (role.type=='SubAdmin' && !item.productId.vendorId)">
+                            <td>
+                                <div class="product_action">
+                                    <div *ngIf="item.status == 'Packing'|| item.status == 'Shipped' || item.status=='ReSchedule' ">
+                                        <button *ngIf="!item.driver && role.type!='Vendor'" class="btn btn-primary mr-1" data-toggle="modal"
+                                            data-target="#driverModal" (click)="requestId = item._id">Assign</button>
+                                        <button *ngIf="item.driver" class="btn btn-primary mr-1" data-toggle="modal"
+                                            data-target="#driverDetailsModal"
+                                            (click)="selectedDriver = item.driver"><span
+                                                class="fas fa-eye"></span></button>
+                                    </div>
+                                    <button *ngIf="item.status == 'New'" class="btn btn-primary mr-1"
+                                        (click)="processOrder(item._id,'Accepted')">Accepted</button>
+                                    <button *ngIf="item.status == 'Accepted'"
+                                        (click)="processOrder(item._id, 'Packing')"
+                                        class="btn btn-primary mr-1">Packing</button>
+                                    <button *ngIf="item.status == 'Packing' || item.status=='ReSchedule'" (click)="processOrderShipped(item, 'Shipped')"
+                                        class="btn btn-primary mr-1">Shipped</button>
+                                    <button *ngIf="item.status == 'Shipped'"
+                                        (click)="processOrder(item._id, 'Delivered')"
+                                        class="btn btn-primary mr-1">Delivered</button>
+                                    <button *ngIf="item.status == 'Canceled'" class="btn btn-danger mr-1"
+                                        disabled>Canceled</button>
+                                    <button
+                                        *ngIf="item.status != 'Shipped' && item.status != 'Delivered' && item.status != 'Rejected' && item.status != 'Canceled'"
+                                        class="btn btn-danger"
+                                        (click)="processOrder(item._id, 'Rejected')">Reject</button>
+
+                                    <button *ngIf="item.status == 'Rejected'" class="btn btn-danger"
+                                        disabled>Rejected</button>
+                                    <button *ngIf="item.status == 'Delivered'" class="btn btn-success"
+                                        disabled>Delivered</button>
+                                </div>
+                            </td>
+                        </ng-container>
+
+                        </tr>
+                    </tbody>
+                </table>
+                <h4 *ngIf="!transOrderList.length" class="text-center">No records found.</h4>
+            </div>
+            <pagination [boundaryLinks]="true" [maxSize]="5" [(ngModel)]="currentPage"
+                (pageChanged)="pageChange($event)"></pagination>
+        </div>
+    </div>
+</div>
+<app-order-modal [deliveryAddress]="selectedAddress" [productList]="selectedProduct" [packList]="selectedPack"
+    [driverList]="driverLists" (onDriverAssign)="getTransactionOrders()" [driverDetail]="selectedDriver"
+    [requestId]="requestId">
+</app-order-modal>

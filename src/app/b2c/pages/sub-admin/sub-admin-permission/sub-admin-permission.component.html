@@ -1,0 +1,300 @@
+<div class="container-fluid">
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="m-0 font-weight-bold text-primary">BORROWER</h6>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <button class="btn btn-primary" (click)="history.back()"><span
+                                    class="fas fa-arrow-left"></span> Back</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <form>
+                <mat-card>
+
+                    <mat-card-content>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h5 class="mt-2"> Manage Vendor </h5>
+                            </div>
+                            <div class="col-md-6">
+                                <section class="example-section">
+                                    <mat-checkbox class="example-margin" name="manageVendorView" [(ngModel)]="body.manageVendorView">View
+                                    </mat-checkbox>
+                                    <mat-checkbox class="example-margin" name="manageVendorWrite" [(ngModel)]="body.manageVendorWrite">Write
+                                    </mat-checkbox>
+                                    <mat-checkbox class="example-margin" name="manageVendorDelete" [(ngModel)]="body.manageVendorDelete">Delete
+                                    </mat-checkbox>
+                                </section>
+                            </div>
+                        </div>
+                        <mat-divider></mat-divider>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5 class="mt-2"> Manage User </h5>
+                        </div>
+                        <div class="col-md-6">
+                            <section class="example-section">
+                                <mat-checkbox class="example-margin" name="manageUserView" [(ngModel)]="body.manageUserView">View
+                                </mat-checkbox>
+                                <mat-checkbox class="example-margin" name="manageUserWrite" [(ngModel)]="body.manageUserWrite">Write
+                                </mat-checkbox>
+                                <mat-checkbox class="example-margin" name="manageUserDelete" [(ngModel)]="body.manageUserDelete">Delete
+                                </mat-checkbox>
+                            </section>
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5 class="mt-2"> Manage Category </h5>
+                        </div>
+                        <div class="col-md-6">
+                            <section class="example-section">
+                                <mat-checkbox class="example-margin" name="manageCategoryView" [(ngModel)]="body.manageCategoryView">View
+                                </mat-checkbox>
+                                <mat-checkbox class="example-margin" name="manageCategoryWrite" [(ngModel)]="body.manageCategoryWrite">Write
+                                </mat-checkbox>
+                                <mat-checkbox class="example-margin" name="manageCategoryDelete" [(ngModel)]="body.manageCategoryDelete">Delete
+                                </mat-checkbox>
+                            </section>
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+
+                    
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5 class="mt-2"> Manage Sub Category </h5>
+                        </div>
+                        <div class="col-md-6">
+                            <section class="example-section">
+                                <mat-checkbox class="example-margin" name="manageSubCategoryView" [(ngModel)]="body.manageSubCategoryView">View
+                                </mat-checkbox>
+                                <mat-checkbox class="example-margin" name="manageSubCategoryWrite" [(ngModel)]="body.manageSubCategoryWrite">Write
+                                </mat-checkbox>
+                                <mat-checkbox class="example-margin" name="manageSubCategoryDelete" [(ngModel)]="body.manageSubCategoryDelete">Delete
+                                </mat-checkbox>
+                            </section>
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5 class="mt-2"> Manage Banner </h5>
+                        </div>
+                        <div class="col-md-6">
+                            <section class="example-section">
+                                <mat-checkbox class="example-margin" name="manageBannerView" [(ngModel)]="body.manageBannerView">View
+                                </mat-checkbox>
+                                <mat-checkbox class="example-margin" name="manageBannerWrite" [(ngModel)]="body.manageBannerWrite">Write
+                                </mat-checkbox>
+                                <mat-checkbox class="example-margin" name="manageBannerWrite" [(ngModel)]="body.manageBannerDelete">Delete
+                                </mat-checkbox>
+                            </section>
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5 class="mt-2"> Manage Deal </h5>
+                        </div>
+                        <div class="col-md-6">
+                            <section class="example-section">
+                                <mat-checkbox class="example-margin" name="manageDealView" [(ngModel)]="body.manageDealView">View
+                                </mat-checkbox>
+                                <mat-checkbox class="example-margin" name="manageDealWrite" [(ngModel)]="body.manageDealWrite">Write
+                                </mat-checkbox>
+                                <mat-checkbox class="example-margin" name="manageDealWrite" [(ngModel)]="body.manageDealDelete">Delete
+                                </mat-checkbox>
+                            </section>
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5 class="mt-2"> Manage Product </h5>
+                        </div>
+                        <div class="col-md-6">
+                            <section class="example-section">
+                                <mat-checkbox class="example-margin" name="manageProductView" [(ngModel)]="body.manageProductView">View
+                                </mat-checkbox>
+                                <mat-checkbox class="example-margin" name="manageProductWrite" [(ngModel)]="body.manageProductWrite">Write
+                                </mat-checkbox>
+                                <mat-checkbox class="example-margin" name="manageProductDelete" [(ngModel)]="body.manageProductDelete">Delete
+                                </mat-checkbox>
+                            </section>
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5 class="mt-2"> Manage Order </h5>
+                        </div>
+                        <div class="col-md-6">
+                            <section class="example-section">
+                                <mat-checkbox class="example-margin" name="manageOrderView" [(ngModel)]="body.manageOrderView">View
+                                </mat-checkbox>
+                                <mat-checkbox class="example-margin" name="manageOrderWrite" [(ngModel)]="body.manageOrderWrite">Write
+                                </mat-checkbox>
+                                <mat-checkbox class="example-margin" name="manageOrderDelete" [(ngModel)]="body.manageOrderDelete">Delete
+                                </mat-checkbox>
+                            </section>
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5 class="mt-2"> Manage Inventory </h5>
+                        </div>
+                        <div class="col-md-6">
+                            <section class="example-section">
+                                <mat-checkbox class="example-margin" name="manageInventryView" [(ngModel)]="body.manageInventryView">View
+                                </mat-checkbox>
+                                <mat-checkbox class="example-margin" name="manageInventryWrite" [(ngModel)]="body.manageInventryWrite">Write
+                                </mat-checkbox>
+                                <mat-checkbox class="example-margin" name="manageInventryDelete" [(ngModel)]="body.manageInventryDelete">Delete
+                                </mat-checkbox>
+                            </section>
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5 class="mt-2"> Manage Driver </h5>
+                        </div>
+                        <div class="col-md-6">
+                            <section class="example-section">
+                                <mat-checkbox class="example-margin" name="manageDriverView" [(ngModel)]="body.manageDriverView">View
+                                </mat-checkbox>
+                                <mat-checkbox class="example-margin" name="manageDriverWrite" [(ngModel)]="body.manageDriverWrite">Write
+                                </mat-checkbox>
+                                <mat-checkbox class="example-margin" name="manageDriverDelete" [(ngModel)]="body.manageDriverDelete">Delete
+                                </mat-checkbox>
+                            </section>
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5 class="mt-2"> Manage Geofence </h5>
+                        </div>
+                        <div class="col-md-6">
+                            <section class="example-section">
+                                <mat-checkbox class="example-margin" name="manageGeofenceView" [(ngModel)]="body.manageGeofenceView">View
+                                </mat-checkbox>
+                                <mat-checkbox class="example-margin" name="manageGeofenceWrite" [(ngModel)]="body.manageGeofenceWrite">Write
+                                </mat-checkbox>
+                                <mat-checkbox class="example-margin" name="manageGeofenceDelete" [(ngModel)]="body.manageGeofenceDelete">Delete
+                                </mat-checkbox>
+                            </section>
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5 class="mt-2"> Manage TimeSlot </h5>
+                        </div>
+                        <div class="col-md-6">
+                            <section class="example-section">
+                                <mat-checkbox class="example-margin" name="manageTimesloatView" [(ngModel)]="body.manageTimesloatView">View
+                                </mat-checkbox>
+                                <mat-checkbox class="example-margin" name="manageTimesloatWrite" [(ngModel)]="body.manageTimesloatWrite">Write
+                                </mat-checkbox>
+                                <mat-checkbox class="example-margin" name="manageTimesloatDelete" [(ngModel)]="body.manageTimesloatDelete">Delete
+                                </mat-checkbox>
+                            </section>
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5 class="mt-2"> Manage Coupon </h5>
+                        </div>
+                        <div class="col-md-6">
+                            <section class="example-section">
+                                <mat-checkbox class="example-margin" name="manageCouponView" [(ngModel)]="body.manageCouponView">View
+                                </mat-checkbox>
+                                <mat-checkbox class="example-margin" name="manageCouponWrite" [(ngModel)]="body.manageCouponWrite">Write
+                                </mat-checkbox>
+                                <mat-checkbox class="example-margin" name="manageCouponDelete" [(ngModel)]="body.manageCouponDelete">Delete
+                                </mat-checkbox>
+                            </section>
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5 class="mt-2"> Manage Truck </h5>
+                        </div>
+                        <div class="col-md-6">
+                            <section class="example-section">
+                                <mat-checkbox class="example-margin" name="manageTruckView" [(ngModel)]="body.manageTruckView">View
+                                </mat-checkbox>
+                                <mat-checkbox class="example-margin" name="manageTruckWrite" [(ngModel)]="body.manageTruckWrite">Write
+                                </mat-checkbox>
+                                <mat-checkbox class="example-margin" name="manageTruckDelete" [(ngModel)]="body.manageTruckDelete">Delete
+                                </mat-checkbox>
+                            </section>
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5 class="mt-2"> Manage Setting </h5>
+                        </div>
+                        <div class="col-md-6">
+                            <section class="example-section">
+                                <mat-checkbox class="example-margin" name="manageSettingWrite" [(ngModel)]="body.manageSettingWrite">Write
+                                </mat-checkbox>
+                            </section>
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5 class="mt-2"> Manage BroadCast </h5>
+                        </div>
+                        <div class="col-md-6">
+                            <section class="example-section">
+                                <mat-checkbox class="example-margin" name="manageBroadcastWrite" [(ngModel)]="body.manageBroadcastWrite">Write
+                                </mat-checkbox>
+                            </section>
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+
+
+                    </mat-card-content>
+                    </mat-card>
+
+                    <div class="form-group mt-2 ml-4">
+                        <button class="btn btn-primary" type="submit" (click)="submitPermission()">Submit</button>
+                    </div>
+            </form>
+            
+        </div>
+    </div>
+</div>

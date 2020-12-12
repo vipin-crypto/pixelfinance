@@ -1,0 +1,539 @@
+<div
+  class="modal"
+  id="subAdminModal"
+  data-backdrop="static"
+  tabindex="-1"
+  role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">ADD BORROWER</h5>
+      </div>
+      <div class="modal-body">
+        <mat-horizontal-stepper #stepper>
+          <mat-step [stepControl]="firstFormGroup" [completed]="false">
+            <form [formGroup]="firstFormGroup">
+              <ng-template matStepLabel>Personal Detail</ng-template>
+              <div class="row">
+                <div class="col-sm-6">
+                  <mat-form-field>
+                    <label>Name</label>
+                    <input matInput type="text" formControlName="Name" name="name"/>
+                  </mat-form-field>
+                  <!--  <mat-error *ngIf="secondFormGroup.Name.touched && secondFormGroup.Name.errors">
+                                    <div *ngIf="secondFormGroup.Name.errors.required">
+                                       Name is
+                                        <strong>required</strong>
+                                    </div>
+                                </mat-error> -->
+                  <mat-form-field>
+                    <label>Address</label>
+                    <input
+                      matInput
+                      type="text"
+                      formControlName="Address"
+                      name="address"
+                    />
+                  </mat-form-field>
+                  <!--  <mat-error *ngIf="f1.Address.touched && f1.Address.errors">
+                                    <div *ngIf="f1.Address.errors.required">
+                                       Address is
+                                        <strong>required</strong>
+                                    </div>
+                                </mat-error> -->
+                </div>
+
+                <div class="col-sm-6">
+                  <mat-form-field>
+                    <label> Age</label>
+                    <input
+                      matInput
+                      type="text"
+                      formControlName="age"
+                      name="age"
+                    />
+                  </mat-form-field>
+                  <!-- <mat-error *ngIf="f1.age.touched && f1.age.errors">
+                                    <div *ngIf="f1.age.errors.required">
+                                        Age is
+                                        <strong>required</strong>
+                                    </div>
+                                </mat-error> -->
+
+                  <mat-form-field>
+                    <label>Bussiness Address</label>
+                    <input
+                      matInput
+                      type="text"
+                      formControlName="upi"
+                      name="upi"
+                    />
+                  </mat-form-field>
+                  <!-- <mat-error *ngIf="f1.upi.touched && f1.upi.errors">
+                                    <div *ngIf="f1.upi.errors.required">
+                                        Upi is
+                                        <strong>required</strong>
+                                    </div>
+                                </mat-error> -->
+                </div>
+                <div class="col-sm-6">
+                  <mat-form-field [floatLabel]="'never'">
+                    <label>Home Address </label>
+                    <input
+                      matInput
+                      type="text"
+                      formControlName="home"
+                      name="address"
+                    />
+                  </mat-form-field>
+                  <!-- <mat-error *ngIf="f1.roles.touched && f1.roles.errors">
+                                    <div *ngIf="f1.roles.errors.required">
+                                        Shcedular is
+                                        <strong>required</strong>
+                                    </div>
+                                </mat-error> -->
+                </div>
+                <div class="col-sm-6">
+                  <mat-form-field [floatLabel]="'never'">
+                    <label>Mobile No.</label>
+                    <input
+                      matInput
+                      type="text"
+                      formControlName="mobile" maxlength="10"
+                      name="mobile"
+                      (keypress)="numbercheck($event)"/>
+                  </mat-form-field>
+                  <!-- <mat-error *ngIf="f1.roles.touched && f1.roles.errors">
+                                    <div *ngIf="f1.roles.errors.required">
+                                        Shcedular is
+                                        <strong>required</strong>
+                                    </div>
+                                </mat-error> -->
+                </div>
+                <div class="col-sm-6">
+                  <mat-form-field [floatLabel]="'never'">
+                    <label>Alternate No.</label>
+                    <input
+                      matInput
+                      type="text" maxlength="10"
+                      formControlName="alternate"
+                      name="phone" (keypress)="numbercheck($event)"
+                    />
+                  </mat-form-field>
+                  <!-- <mat-error *ngIf="f1.roles.touched && f1.roles.errors">
+                                    <div *ngIf="f1.roles.errors.required">
+                                        Shcedular is
+                                        <strong>required</strong>
+                                    </div>
+                                </mat-error> -->
+                </div>
+                <div class="col-sm-6">
+                  <mat-form-field>
+                    <label> Bussiness Name</label>
+                    <input
+                      matInput
+                      type="text"
+                      formControlName="bussiness"
+                      name="bussiness"
+                    />
+                  </mat-form-field>
+                  <!-- <mat-error *ngIf="f1.bussiness.touched && f1.bussiness.errors">
+                                    <div *ngIf="f1.bussiness.errors.required">
+                                        Bussiness is
+                                        <strong>required</strong>
+                                    </div>
+                                </mat-error> -->
+                </div>
+              </div>
+              <div class="col-sm-6 add_button_next">
+                <button
+                  mat-button
+                  mat-raised-button
+                  class="primary"
+                  matStepperNext
+                  (click)="onSubmitFirst()"
+                >
+                  Next
+                </button>
+              </div>
+            </form>
+          </mat-step>
+
+          <mat-step [stepControl]="secondFormGroup" >
+            <form [formGroup]="secondFormGroup">
+              <ng-template matStepLabel>Grantor</ng-template>
+              <div class="row">
+                <div class="col-sm-6">
+                  <mat-form-field>
+                    <label>Name</label>
+                    <input
+                      matInput
+                      type="text"
+                      formControlName="sName"
+                      name="name"
+                    />
+                  </mat-form-field>
+                  <!--  <mat-error *ngIf="f1.Name.touched && f1.Name.errors">
+                                <div *ngIf="f1.Name.errors.required">
+                                   Name is
+                                    <strong>required</strong>
+                                </div>
+                            </mat-error> -->
+                  <mat-form-field>
+                    <label>Address</label>
+                    <input
+                      matInput
+                      type="text"
+                      formControlName="sAddress"
+                      name="address"
+                    />
+                  </mat-form-field>
+                  <!--<mat-error *ngIf="f1.Address.touched && f1.Address.errors">
+                                <div *ngIf="f1.Address.errors.required">
+                                   Address is
+                                    <strong>required</strong>
+                                </div>
+                            </mat-error> -->
+                </div>
+
+                <div class="col-sm-6">
+                  <mat-form-field>
+                    <label> Age</label>
+                    <input
+                      matInput
+                      type="text"
+                      formControlName="sage"
+                      name="age"
+                    />
+                  </mat-form-field>
+                  <!-- <mat-error *ngIf="f1.age.touched && f1.age.errors">
+                                <div *ngIf="f1.age.errors.required">
+                                    Age is
+                                    <strong>required</strong>
+                                </div>
+                            </mat-error> -->
+
+                  <mat-form-field>
+                    <label>Bussiness Address</label>
+                    <input
+                      matInput
+                      type="text" 
+                      formControlName="supi"
+                      name="phone"
+                    />
+                  </mat-form-field>
+                  <!-- <mat-error *ngIf="f1.upi.touched && f1.upi.errors">
+                                <div *ngIf="f1.upi.errors.required">
+                                    Upi is
+                                    <strong>required</strong>
+                                </div>
+                            </mat-error> -->
+                </div>
+                <div class="col-sm-6">
+                  <mat-form-field [floatLabel]="'never'">
+                    <label>Home Address </label>
+                    <input
+                      matInput
+                      type="text"
+                      formControlName="shome"
+                      name="phone"
+                    />
+                  </mat-form-field>
+                  <!-- <mat-error *ngIf="f1.roles.touched && f1.roles.errors">
+                                <div *ngIf="f1.roles.errors.required">
+                                    Shcedular is
+                                    <strong>required</strong>
+                                </div>
+                            </mat-error> -->
+                </div>
+                <div class="col-sm-6">
+                  <mat-form-field [floatLabel]="'never'">
+                    <label>Mobile No.</label>
+                    <input
+                      matInput
+                      type="text"
+                      formControlName="smobile" maxlength="10"
+                      name="phone" (keypress)="numbercheck($event)"
+                    />
+                  </mat-form-field>
+                  <!-- <mat-error *ngIf="f1.roles.touched && f1.roles.errors">
+                                <div *ngIf="f1.roles.errors.required">
+                                    Shcedular is
+                                    <strong>required</strong>
+                                </div>
+                            </mat-error> -->
+                </div>
+                <div class="col-sm-6">
+                  <mat-form-field [floatLabel]="'never'">
+                    <label>Alternate No.</label>
+                    <input
+                      matInput
+                      type="text"
+                      formControlName="salternate" maxlength="10"
+                      name="phone" (keypress)="numbercheck($event)"
+                    />
+                  </mat-form-field>
+                  <!-- <mat-error *ngIf="f1.roles.touched && f1.roles.errors">
+                                <div *ngIf="f1.roles.errors.required">
+                                    Shcedular is
+                                    <strong>required</strong>
+                                </div>
+                            </mat-error> -->
+                </div>
+                <div class="col-sm-6">
+                  <mat-form-field>
+                    <label> Bussiness Name</label>
+                    <input
+                      matInput
+                      type="text"
+                      formControlName="sbussiness"
+                      name="bussiness"
+                    />
+                  </mat-form-field>
+                  <!-- <mat-error *ngIf="f1.bussiness.touched && f1.bussiness.errors">
+                                <div *ngIf="f1.bussiness.errors.required">
+                                    Bussiness is
+                                    <strong>required</strong>
+                                </div>
+                            </mat-error> -->
+                </div>
+              </div>
+              <div class="col-sm-6 add_button_next">
+                <button
+                  mat-button
+                  mat-raised-button
+                  class="primary"
+                  matStepperPrevious
+                  (click)="onSubmitFirst()"
+                >
+                  Back
+                </button>
+                <button
+                  mat-button
+                  mat-raised-button
+                  class="primary"
+                  matStepperNext
+                >
+                  Next
+                </button>
+              </div>
+            </form>
+          </mat-step>
+
+          <mat-step [stepControl]="thirdFormGroup" >
+            <form [formGroup]="thirdFormGroup">
+            <div class="img-coll">
+              <div class="col-sm-4 add_button_next imgaeFile">
+                <p>Image</p>
+                <label for="Imagedoc">
+                <figure class="plus">
+                  <img class="dummy" [src]="Imagedoc ? Imagedoc : 'assets/img/plus.svg'" />
+                </figure>
+            </label>
+                <input
+                  type="file"
+                  id="adhar"
+                  name="myfile"
+                  (change)="selectImage($event.target.files,2,1)"
+                />
+              </div>
+              <div class="col-sm-4 add_button_next imgaeFile">
+                <p>Aadhar</p>
+                <label for="adhar">
+                <figure class="plus">
+                  <img class="dummy" [src]="adhar ? adhar : 'assets/img/plus.svg'" />
+                </figure>
+              </label>
+                <input
+                  type="file"
+                  id="myfile"
+                  name="myfile"
+                  (change)="selectImage($event.target.files, 2,2)"
+                />
+              </div>
+            </div>
+            <div class="img-coll">
+              <div class="col-sm-4 add_button_next imgaeFile">
+                <p>Check</p>
+                <label for="checkdoc">
+                <figure class="plus">
+                  <img class="dummy" [src]="checkdoc ? checkdoc : 'assets/img/plus.svg'" />
+               
+                </figure>
+              </label>
+                <input
+                  type="file"
+                  id="myfile"
+                  name="myfile"
+                  (change)="selectImage($event.target.files, 2,3)"
+                />
+              </div>
+              <div class="col-sm-4 add_button_next imgaeFile">
+                <p>PAN Card</p>
+                <label for="Pandoc">
+                <figure class="plus">
+                  <img class="dummy" [src]="Pandoc  ? Pandoc : 'assets/img/plus.svg'" />
+               
+                </figure>
+                </label>
+                <input
+                  type="file"
+                  id="myfile"
+                  name="myfile"
+                  (change)="selectImage($event.target.files, 2,4)"
+                />
+              </div>
+            </div>
+           
+            <div class="img-coll">
+              <div class="col-sm-4 add_button_next imgaeFile">
+                <p>Electricity bill</p>
+                <label for="electricdoc">
+                <figure class="plus">
+                  <img class="dummy" [src]="electricdoc ? electricdoc : 'assets/img/plus.svg'" />
+              
+                </figure>
+                </label>
+                <input
+                  type="file"
+                  id="myfile"
+                  name="myfile"
+                  (change)="selectImage($event.target.files, 2,5)"
+                />
+              </div>
+              <div class="col-sm-4 add_button_next imgaeFile">
+                <p>affidavit</p>
+                <label for="affidavitedoc">
+                <figure class="plus">
+                  <img class="dummy" [src]="affidavitedoc ? affidavitedoc : 'assets/img/plus.svg'" />
+                </figure>
+            </label>
+                <input
+                  type="file"
+                  id="myfile"
+                  name="myfile"
+                  (change)="selectImage($event.target.files, 2,6)"
+                />
+              </div>
+            </div>
+            
+              <ng-template matStepLabel>Documents</ng-template>
+              <!-- <h1>Hello</h1> -->
+              <div class="col-sm-6 add_button_next">
+                <button
+                  mat-button
+                  mat-raised-button
+                  class="primary"
+                  matStepperPrevious
+                  (click)="onSubmitFirst()"
+                >
+                  Back
+                </button>
+                <button
+                  mat-button
+                  mat-raised-button
+                  class="primary"
+                  data-dismiss="modal"
+                  matStepperNext
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+          </mat-step>
+        </mat-horizontal-stepper>
+      </div>
+      <!-- <div class="modal-footer">  (click)="addBorrower()"
+          <button *ngIf="!flags.isEdit" type="button" class="btn btn-primary"
+            [disabled]="!subAdminForm.valid || flags.isAdded"
+            (click)="addSubAdmin()">{{flags.isAdded?'Saving...':'Save'}}</button>
+          <button *ngIf="flags.isEdit" type="button" class="btn btn-primary"
+            [disabled]="!subAdminForm.valid || flags.isUpdate"
+            (click)="editSubAdmin()">{{flags.isUpdate?'Updating...':'Update'}}</button>
+          <button type="button" class="btn btn-secondary" (click)="onCancel()" id="closeSubAdminModal"
+            data-dismiss="modal">Cancel</button>
+        </div> -->
+    </div>
+  </div>
+</div>
+<input
+  type="hidden"
+  id="openSubAdminModal"
+  data-target="#subAdminModal"
+  data-toggle="modal"
+/>
+
+<div
+  class="modal"
+  id="deliveryAddressModal"
+  data-backdrop="static"
+  tabindex="-1"
+  role="dialog"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Documents</h5>
+      </div>
+      <div *ngIf="documentdata" class="modal-body">
+        <div class="d-flex justify-content-around">
+          <div class="col-md-04">
+            <div class="form-group">
+              <a [href]="imgUrl + documentdata.panCard" target="_blank"
+                ><img [src]="documentdata.panCard ? imgUrl + documentdata.panCard : 'assets/img/pixel.jpg'" width="150" height="100"
+              /></a>
+              <label>PanCard</label>
+            </div>
+          </div>
+          <div class="col-md-04">
+            <div class="form-group">
+              <a [href]="imgUrl + documentdata.aadhar" target="_blank">
+                <img [src]="documentdata.aadhar ? imgUrl + documentdata.aadhar :  'assets/img/pixel.jpg'" width="150" height="100"
+              /></a>
+              <label>AadharCard</label>
+            </div>
+          </div>
+          <div class="col-md-04">
+            <div class="form-group">
+              <a [href]="imgUrl + documentdata.aadhar" target="_blank">
+                <img [src]="documentdata.image ? imgUrl + documentdata.image : 'assets/img/pixel.jpg'" width="150" height="100"
+              /></a>
+              <label>Images</label>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-around">
+          <div class="col-md-04">
+            <div class="form-group">
+              <a [href]="imgUrl + documentdata.panCard" target="_blank"
+                ><img [src]="documentdata.panCard ? imgUrl + documentdata.panCard : 'assets/img/pixel.jpg'" width="150" height="100"
+              /></a>
+              <label>ElectricityBill</label>
+            </div>
+          </div>
+          <div class="col-md-04">
+            <div class="form-group">
+              <a [href]="imgUrl + documentdata.aadhar" target="_blank">
+                <img [src]="documentdata.aadhar ? imgUrl + documentdata.aadhar :  'assets/img/pixel.jpg'" width="150" height="100"
+              /></a>
+              <label>Reciept</label>
+            </div>
+          </div>
+          <div class="col-md-04">
+            <div class="form-group">
+              <a [href]="imgUrl + documentdata.aadhar" target="_blank">
+                <img [src]="documentdata.image ? imgUrl + documentdata.image : 'assets/img/pixel.jpg'" width="150" height="100"
+              /></a>
+              <label>Affidavit</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,102 @@
+<!--address Infomation-->
+
+<div class="modal" id="deliveryAddressModal" data-backdrop="static" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Address</h5>
+            </div>
+            <div *ngIf="deliveryAddress" class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Address</label>
+                            <input type="text" class="form-control" [value]="deliveryAddress.address" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Country</label>
+                            <input type="text" class="form-control" [value]="deliveryAddress.country" readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>State</label>
+                            <input type="text" class="form-control" [value]="deliveryAddress.state" readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>City</label>
+                            <input type="text" class="form-control" [value]="deliveryAddress.city" readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Street</label>
+                            <input type="text" class="form-control" [value]="deliveryAddress.street" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Pin Code</label>
+                            <input type="text" class="form-control" [value]="deliveryAddress.pinCode" readonly>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Document Modal -->
+
+<div class="modal" id="documentModal" data-backdrop="static" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Documents</h5>
+            </div>
+            <div *ngIf="documents" class="modal-body">
+                <div class="d-flex justify-content-around">
+                    <div class="col-md-04">
+                        <div class="form-group">
+                            <a href="{{imageUrl}}/{{documents.documentOne}}" target="_blank"><img
+                                    src="{{imageUrl}}/{{documents.documentOne}}" width="150" height="100"
+                                    alt="image"></a>
+                            <label>Document 1</label>
+                        </div>
+                    </div>
+                    <div class="col-md-04">
+                        <div class="form-group">
+                            <a href="{{imageUrl}}/{{documents.documentTwo}}" target="_blank"> <img
+                                    src="{{imageUrl}}/{{documents.documentTwo}}" width="150" height="100"
+                                    alt="image"></a>
+                            <label>Document 2</label>
+                        </div>
+                    </div>
+                    <div class="col-md-04">
+                        <div class="form-group">
+                            <a href="{{imageUrl}}/{{documents.documentThree}}" target="_blank"> <img
+                                    src="{{imageUrl}}/{{documents.documentThree}}" width="150" height="100"
+                                    alt="image"></a>
+                            <label>Document 3</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

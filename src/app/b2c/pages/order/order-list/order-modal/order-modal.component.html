@@ -1,0 +1,400 @@
+<!-- <div class="modal" id="openAssignModal" data-backdrop="static" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Assign Driver</h5>
+        </div>
+        <div class="modal-body">
+          <form #assignForm="ngForm">
+            <div class="form-group">
+              <label>Driver</label>
+              <select name="driver" class="form-control" [(ngModel)]="body.driverId">
+                <option value="">Select Driver</option>
+                <option *ngFor="let item of driverList; let i = index" value="{{item._id}}">{{item.firstName}}
+                  {{item.lastName}}</option>
+              </select>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" [disabled]="!assignForm.valid || flags.isAssigned"
+            (click)="assignDriver()">{{flags.isAssigned?'Hold on...':'Assign To Driver'}}</button>
+          <button type="button" class="btn btn-secondary" id="closeDriverAssignModal" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+<!--address Infomation-->
+
+<div class="modal" id="deliveryAddressModal" data-backdrop="static" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delivery Address</h5>
+      </div>
+      <div *ngIf="deliveryAddress" class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Address</label>
+              <textarea type="text" class="form-control" rows="4" readonly>{{deliveryAddress.address1}}</textarea>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Street Name*</label>
+              <input type="text" class="form-control" [value]="deliveryAddress.address2" readonly>
+            </div>
+          </div>
+         
+        </div>
+        
+        <div class="row">
+          
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Block</label>
+              <input type="text" class="form-control" [value]="deliveryAddress.block" readonly>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Area</label>
+              <input type="text" class="form-control" [value]="deliveryAddress.area" readonly>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Landmark*</label>
+              <input type="text" class="form-control" [value]="deliveryAddress.landmark" readonly>
+            </div>
+          </div>
+          
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Address Type</label>
+              <input type="text" class="form-control" [value]="deliveryAddress.addressType" readonly>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Product Detail Modal-->
+
+<div class="modal" id="productInfoModal" data-backdrop="static" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Product</h5>
+      </div>
+      <div *ngIf="productList" class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label></label>
+              <input type="text" class="form-control" [value]="productList.name" readonly>
+            </div>
+          </div>
+          <!-- <div class="col-md-6">
+            <div class="form-group">
+              <label>Discount</label>
+              <input type="text" class="form-control" [value]="productList.discount" readonly>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Discount Type</label>
+              <input type="text" class="form-control" [value]="productList.type" readonly>
+            </div>
+          </div> -->
+          <!-- <div class="col-md-12">
+            <div class="form-group">
+              <label>Total Amount</label>
+              <input type="text" class="form-control" [value]="productList.totalAmount" readonly>
+            </div>
+          </div> -->
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Country</label>
+              <input type="text" class="form-control" [value]="productList.country" readonly>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Category</label>
+              <input type="text" class="form-control" [value]="productList.category.name" readonly>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Sub Category</label>
+              <input type="text" class="form-control" [value]="productList.subCategory.name" readonly>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Brand</label>
+              <input type="text" class="form-control" [value]="productList.brand" readonly>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <!-- <div class="col-md-6">
+            <div class="form-group">
+              <label>Delivery Time</label>
+              <input type="text" class="form-control" [value]="productList.deliveryTime" readonly>
+            </div>
+          </div> -->
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Description</label>
+              <textarea type="text" class="form-control" rows="4" readonly>{{productList.description}}</textarea>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Pack Modal -->
+
+<div class="modal" id="packModal" data-backdrop="static" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Pack</h5>
+      </div>
+      <div *ngIf="packList" class="modal-body">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Quantity</label>
+              <input type="text" class="form-control" [value]="packList.quantity" readonly>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Unit</label>
+              <input type="text" class="form-control" [value]="packList.unit" readonly>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Price</label>
+              <input type="text" class="form-control" [value]="packList.price" readonly>
+            </div>
+          </div>
+
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Max User Quantity</label>
+              <input type="text" class="form-control" [value]="packList.maxUserQuantity" readonly>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Description</label>
+              <textarea type="text" rows="4" class="form-control" readonly>{{packList.description}}</textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Assign Driver -->
+<div class="modal" id="driverModal" data-backdrop="static" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Pack</h5>
+      </div>
+      <div class="modal-body">
+        <form #assignForm="ngForm">
+          <div class="form-group">
+            <label>Driver</label>
+            <select name="driver" class="form-control" [(ngModel)]="body.driver" required>
+              <option value="">Select Driver</option>
+              <option *ngFor="let item of driverList; let i = index" value="{{item._id}}">{{item.firstName}}
+                {{item.lastName}}</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" [disabled]="!assignForm.valid || flags.isAssigned"
+          (click)="assignDriver()">{{flags.isAssigned?'Hold on...':'Assign To Driver'}}</button>
+        <button type="button" class="btn btn-secondary" id="closeDriverAssignModal" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Assign Driver -->
+<div class="modal" id="driverModals" data-backdrop="static" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Pack</h5>
+      </div>
+      <div class="modal-body">
+        <form #assignForm="ngForm">
+          <div class="form-group">
+            <label>Drivers</label>
+            <select name="driver" class="form-control" [(ngModel)]="body.driver" required>
+              <option value="">Select Driver</option>
+              <option *ngFor="let item of driverList; let i = index" value="{{item._id}}">{{item.firstName}}
+                {{item.lastName}}</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" [disabled]="!assignForm.valid || flags.isAssigned"
+          (click)="assignDriverToAll()">{{flags.isAssigned?'Hold on...':'Assign To Driver'}}</button>
+        <button type="button" class="btn btn-secondary" id="closeDriverAssignModals" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!--Driver Information-->
+<div class="modal" id="driverDetailsModal" data-backdrop="static" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Driver Details</h5>
+      </div>
+      <div *ngIf="driverDetail" class="modal-body">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" class="form-control" [value]="driverDetail.firstName" readonly>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" class="form-control" [value]="driverDetail.lastName" readonly>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Email</label>
+              <input type="text" class="form-control" [value]="driverDetail.email" readonly>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Phone</label>
+              <input type="text" class="form-control" [value]="driverDetail.phone" readonly>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Address</label>
+              <textarea type="text" class="form-control" [value]="driverDetail.address" readonly></textarea>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>City</label>
+              <input type="text" class="form-control" [value]="driverDetail.city" readonly>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Bio</label>
+              <textarea class="form-control" [value]="driverDetail.bio" readonly></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- <div class="modal" id="productInfoModal" data-backdrop="static" tabindex="-1" role="dialog">
+  <div class="modal-dialog product-detail" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Product Information</h5>
+      </div>
+      <div class="modal-body">
+        <table class="table table-responsive table-striped">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Image</th>
+              <th>Name</th>
+          
+              <th>Discount</th>
+              <th>Product Quantity</th>
+             
+              <th>Category</th>
+              <th>Sub Category</th>
+              <th>Delivery Time</th>
+              <th>Brand</th>
+             
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of productList; let i = index">
+              <td>{{i + 1}}</td>
+              <td>
+                <figure>
+                  <a href="{{imageUrl}}/{{item.productImages[0]}}" target="_blank"><img
+                      src="{{imageUrl}}/{{item.productImages[0]}}" width="70px" height="70px"></a>
+                </figure>
+              </td>
+              <td>{{item.name}}</td>           
+              <td>{{item.discount}}</td>
+              <td>{{item.pack.quantity}}</td>
+              <td>{{item.category.name}}</td>
+              <td>{{item.subCategory.name}}</td>
+              <td>{{item.deliveryTime}}</td>
+              <td>{{item.brand?item.brand:'N/A'}}</td>
+              
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div> -->

@@ -1,0 +1,62 @@
+<div class="modal" id="subCategoryModal" data-backdrop="static" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{flags.isEdit?'Edit':'Add'}} Sub Category</h5>
+      </div>
+      <div class="modal-body">
+        <form #subCategoryForm="ngForm">
+          <div class="form-group">
+            <label>Image</label><br>
+            <input type="file" (change)="onImageSelect($event)" id="subCategoryFile" accept=".png, .jpg, .jpeg">
+            <div *ngIf="src">
+              <img src="{{src}}" width="100px" height="100px">
+              <!--              <p><a href="javascript:void(0)" (click)="onImageRemove()">Remove</a></p>-->
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Category</label>
+            <select name="category" class="form-control" [(ngModel)]="body.category" required>
+              <option value="">Select Category</option>
+              <option *ngFor="let item of categoryList;" value="{{item._id}}">{{item.name}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-control" maxlength="50" [(ngModel)]="body.name" name="name" required />
+          </div>
+          <div class="form-group">
+            <label>Discount</label>
+            <input type="number" class="form-control" name="discount" [(ngModel)]="body.discount"
+             appNumberOnly />
+          </div>
+          <div *ngIf="body.discount" class="form-group">
+            <label>Type</label>
+            <select class="form-control" name="type" [(ngModel)]="body.type" required>
+              <option value="">--select Type--</option>
+              <option value="Percentage">Percentage</option>
+              <option value="Flat">Flat</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Is Upto</label><br>
+            <ui-switch labelOn=" ON" switchColor="#4e73df" id="isUpto" name="isUpto" [(ngModel)]="body.isUpto"
+              labelOff="OFF"></ui-switch>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button *ngIf="!flags.isEdit" type="button" class="btn btn-primary"
+          [disabled]="!subCategoryForm.valid || flags.isAdded"
+          (click)="addSubCategory()">{{flags.isAdded?'Saving...':'Save'}}</button>
+        <button *ngIf="flags.isEdit" type="button" class="btn btn-primary"
+          [disabled]="!subCategoryForm.valid || flags.isUpdate"
+          (click)="editSubCat()">{{flags.isUpdate?'Updating...':'Update'}}</button>
+        <button type="button" class="btn btn-secondary" (click)="onCancel()" id="closeSubCategoryModal"
+          data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+<input type="hidden" id="openSubCatModal" data-target="#subCategoryModal" data-toggle="modal">

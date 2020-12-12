@@ -1,0 +1,46 @@
+ 
+agm-map{
+    height: 150px;
+    width:100%;
+}
+ 
+.mat-stepper-horizontal {
+    margin-top: 8px;
+  }
+  
+  .mat-form-field {
+    margin-top: 16px;
+  }
+ #myfile 
+ {
+  opacity: 0;
+  position: absolute;
+  top: 109px;
+  left: 48px;
+ }
+
+ .img-coll{
+   display: flex;
+   margin-top: 15px;
+ }
+
+ .image-file{
+  flex: 0 0 33.33333%;
+  max-width: 33.33333%;
+  margin-left: 48px;
+  img{
+    width:170px;
+  }
+ }
+
+ .img-coll{
+   input{
+     display: none;
+   }
+ }
+
+ .plus{
+   img{
+     width: 170px;
+   }
+ }

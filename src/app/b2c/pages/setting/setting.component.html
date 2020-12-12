@@ -1,0 +1,183 @@
+<div class="container-fluid">
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="m-0 font-weight-bold text-primary">SETTING</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="setting" class="card-body">
+            <form #settingForm="ngForm">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Tax(%)</label>
+                            <input type="number" name="vat" [(ngModel)]="setting.vat" maxlength="50"
+                                class="form-control" appNumberOnly required />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Delivery Fee</label>
+                            <input type="number" name="deliveryFee" [(ngModel)]="setting.deliveryFee" appDecimalnumber
+                                maxlength="6" class="form-control" required />
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Min Order Amount</label>
+                            <input type="number" name="minOrderAmount" [(ngModel)]="setting.minOrderAmount"
+                                maxlength="6" class="form-control" appDecimalnumber required />
+                        </div>
+                    </div>
+
+                   
+                </div>
+
+                <div  *ngIf="(role.type=='SubAdmin'&& access.manageSettingWrite==true)||role.type=='Admin'" class="row mt-2">
+                    <div class="col-md-12">
+                        <button class="btn btn-primary" (click)="updateSetting()" [disabled]="!settingForm.valid"><span
+                                class="fas fa-save"></span> {{flags.isUpdate?'Updating...':'Update'}}</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="setting_area_div">
+            
+            <div class="area_setting " style="width:100%">
+                <!-----setting margin class use only css use margin-top property-->
+                <h3 class="setting_title"><span>3</span>Pick-Up Location</h3>
+                <div class="d-flex">
+                    <input style="width:92%" type="text" class="form-control" (keydown.enter)="$event.preventDefault()" placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>    
+                    <button  *ngIf="(role.type=='SubAdmin'&& access.manageSettingWrite==true)||role.type=='Admin'" class="btn btn-primary ml-2" [disabled]="flags.isUpdate" (click)="addAddress()"><span
+                        class="fas fa-save"></span> Save</button>     
+                </div>
+               
+                <div class="all_block_input mt-3">
+                      <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+                        <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true"
+                         (dragEnd)="markerDragEnd($event)"></agm-marker>
+                      </agm-map>
+                    
+                </div>
+            </div>
+          
+         </div>
+
+         <h5 style="color:rgb(51, 47, 47);margin-left:10px"><strong>Location</strong>: {{address}}</h5>
+         <!-- <div>Latitude: {{latitude}} <span class="ml-3">Longitude: {{longitude}}</span></div> -->
+       
+        <!-----start setting block input-->
+        <!-- <div class="setting_area_div mt-3">    
+            <div class="area_setting setting_margin">
+                 <h3 class="setting_title"><span>3</span>Area</h3>
+                <div class="all_block_input">
+                    <input type="text" name="deliveryFee"  [(ngModel)]="area"  class="form-control"
+                        required />
+                    <button class="btn btn-primary" [disabled]="flags.isUpdate " (click)="addArea()"><span
+                            class="fas fa-save"></span> Save</button>
+                            
+                </div>
+            </div>
+          
+            <div class="area_setting_list setting_margin right_side_block">
+                 <h3 class="setting_title">Area List</h3>
+                <div class="area_list">
+                    <ul>
+                        <li *ngFor="let data of areaList">
+                            <div class="area_list_text">
+                                <p>{{data}}</p>
+                            </div>
+                            <div class="product_action">
+                                <button class="btn btn-primary mr-1" (click)="editArea(data)"><span
+                                        class="fas fa-edit"></span></button>
+                                <button class="btn btn-danger" (click)="deleteArea(data)"><span
+                                        class="fas fa-trash"></span></button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div> -->
+
+        
+        <!-- <div class="setting_area_div">        
+            <div class="area_setting setting_margin">
+                
+                <h3 class="setting_title"><span>3</span>Block</h3>
+                <div class="all_block_input">
+                    <input type="text" name="deliveryFee"  [(ngModel)]="block"
+                        class="form-control" required />
+                    <button class="btn btn-primary" [disabled]="flags.isUpdate" (click)="addBlock()"><span
+                            class="fas fa-save"></span> Save</button>
+                </div>
+            </div>
+           
+            <div class="area_setting_list setting_margin right_side_block">
+                 <h3 class="setting_title">Block List</h3>
+                <div class="area_list">
+                    <ul>
+                        <li *ngFor="let data of blockList">
+                            <div class="area_list_text">
+                                <p>{{data}}</p>
+                            </div>
+                            
+                            <div class="product_action">
+                                <button class="btn btn-primary mr-1" (click)="editBlock(data)"><span
+                                        class="fas fa-edit"></span></button>
+                                <button class="btn btn-danger" (click)="deleteBlock(data)"><span
+                                        class="fas fa-trash"></span></button>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+
+        </div> -->
+
+
+          <!--------address list-->
+        
+        
+        <!-----start quanity list-->
+        <!-- <div class="setting_area_div">
+            <div class="area_setting setting_margin">
+ 
+                <h3 class="setting_title"><span>3</span>Quality Index</h3>
+                <div class="all_block_input">
+                    <input type="text" name="index" [(ngModel)]="index" CharacterOnlyDirective class="form-control"
+                        required />
+                    <button class="btn btn-primary" [disabled]="flags.isUpdate" (click)="updateIndex()"><span
+                            class="fas fa-save"></span> Save</button>
+                </div>
+            </div>
+            <div class="area_setting_list setting_margin right_side_block">
+               
+                <h3 class="setting_title">Quantity List</h3>
+                <div class="area_list">
+                    <ul>
+                        <li *ngFor="let data of QualityIndex">
+                            <div class="area_list_text">
+                                <p>{{data}}</p>
+                            </div>
+                            <div class="setting_close">
+                      <i class="fa fa-times" aria-hidden="true"></i>
+                  </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div> -->
+
+        
+    </div>
+</div>

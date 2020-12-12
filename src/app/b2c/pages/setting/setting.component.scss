@@ -1,0 +1,98 @@
+
+        h3.setting_title {
+            font-size: 15px;
+            font-weight: 600;
+            border-bottom: 2px solid #4e73df;
+            padding-bottom: 3px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        h3.setting_title span {
+            font-size: 0px;
+            height: 8px;
+            width: 8px;
+            background: #4e73df;
+            display: block;
+            margin-right: 5px;
+        }
+
+        .setting_margin {
+            margin-top: 0rem;
+            width: 49%;
+        }
+
+        .all_block_input {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .all_block_input input {
+            margin-right: 17px;
+            padding: 6px 8px;
+            width: 58%;
+            border: 1px solid #ccc;
+            font-size: 18px;
+            color: #6e707e;
+            border-radius: .25rem;
+        }
+
+        .all_block_input button {
+            padding: 6px 23px;
+            font-size: 1rem;
+            background: #4e73df;
+            border: navajowhite;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .area_list ul li {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 7px;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+        .area_list_text p {
+            margin: 0px;
+        }
+
+        .area_list_text {
+            width: 90%;
+        }
+
+        .setting_close {
+            width: 10%;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .area_list ul {
+            padding: 0px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .setting_area_div {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding:1rem;
+        }
+        .setting_close i {
+            cursor: pointer;
+        }
+
+        .area_setting_list.setting_margin.right_side_block {
+            width: 40%;
+        }
+        .right_side_block h3.setting_title {
+            border-color: #ddd;
+        }
+
+        agm-map{
+            height: 200px;
+            width:100%;
+        }

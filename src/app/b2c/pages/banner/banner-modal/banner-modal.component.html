@@ -1,0 +1,211 @@
+<div class="modal" id="addEditBannerModal" data-backdrop="static" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{flags.isEdit?'Edit':'Add'}} Banner</h5>
+            </div>
+            <div class="modal-body">
+                <form #bannerForm="ngForm">
+                    <div class="form-group">
+                        <label>Image</label><br>
+                        <input type="file" id="bannerImage" (change)="onImageSelect($event)" accept=".png, .jpg, .jpeg">
+                        <div *ngIf="src" class="mr-1">
+                            <img src="{{src}}" width="100px" height="100px">
+                            <!--              <p><a href="javascript:void(0)" (click)="onImageRemove()">Remove</a></p>-->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" name="name" [(ngModel)]="addBannerBody.name" maxlength="50"
+                            class="form-control" required />
+                    </div>
+                    <!-- <div class="form-group">
+                        <label>Discount</label>
+                        <input type="number" name="discount" [(ngModel)]="addBannerBody.discount" maxlength="6"
+                            class="form-control" onkeypress="return event.charCode != 45"/>
+                    </div>
+                    <div *ngIf="addBannerBody.discount" class="form-group">
+                        <label>Discount Type</label>
+                        <select name="discountType" class="form-control" [(ngModel)]="addBannerBody.discountType"
+                            required>
+                            <option value="">Select Type</option>
+                            <option value="Flat">Flat</option>
+                            <option value="Percentage">Percentage</option>
+                        </select>
+                    </div> -->
+
+                    <div class="form-group">
+                        <label>Banner Type</label>
+                        <select name="type" class="form-control" [(ngModel)]="addBannerBody.type" required>
+                            <option value="">Select Type</option>
+                            <option value="Top">Top</option>
+                            <!-- <option value="Bottom">Bottom</option> -->
+                            <!-- <option value="Offer">Offer</option> -->
+                        </select>
+                    </div>
+                    <!--          <div class="form-group">-->
+                    <!--            <label>Coupon</label>-->
+                    <!--            <select name="coupon" class="form-control" [(ngModel)]="addBannerBody.coupon">-->
+                    <!--              <option value="">Select Category</option>-->
+                    <!--              <option *ngFor="let item of couponList;" value="{{item.item_id}}">{{item.item_text}}</option>-->
+                    <!--            </select>-->
+                    <!--          </div>-->
+                    <div class="form-group">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                [(ngModel)]="bannerFor" id="inlineRadio1" value="1" (click)="emptyOfferbody()"
+                                required />
+                            <label class="form-check-label" for="inlineRadio1">Category</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                [(ngModel)]="bannerFor" id="inlineRadio2" value="2" (click)="emptyOfferbody()" required>
+                            <label class="form-check-label" for="inlineRadio2">Sub Category</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                [(ngModel)]="bannerFor" id="inlineRadio3" value="3" (click)="emptyOfferbody()" required>
+                            <label class="form-check-label" for="inlineRadio3">Product</label>
+                        </div>
+                        <!-- <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                [(ngModel)]="bannerFor" id="inlineRadio4" value="4" required>
+                            <label class="form-check-label" for="inlineRadio4">Brand</label>
+                        </div> -->
+                    </div>
+                    <div *ngIf="bannerFor == '1'" class="category-banner">
+                        <div class="form-group">
+                            <label>Category</label>
+                            <ng-multiselect-dropdown [placeholder]="'Select Category'" [data]="categoryList"
+                                [(ngModel)]="selectedCat" [ngModelOptions]="{standalone: true}"
+                                [settings]="dropDownSetting" (onSelect)="onItemSelect($event, 1)"
+                                (onDeSelect)="onDeSelect($event, 1)">
+                            </ng-multiselect-dropdown>
+                        </div>
+                    </div>
+                    <div *ngIf="bannerFor == '2'" class="category-banner">
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select name="category" class="form-control" [(ngModel)]="offerDetails.category"
+                                (change)="onChangeCategory($event.target.value)">
+                                <option value="">Select Category</option>
+                                <option *ngFor="let item of categoryList;" value="{{item.item_id}}">{{item.item_text}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Sub Category</label>
+                            <ng-multiselect-dropdown [placeholder]="'Select Sub Category'" [data]="subCategories"
+                                [(ngModel)]="selectedSubCat" name="subCatList" [settings]="dropDownSetting"
+                                (onSelect)="onItemSelect($event, 2)" (onDeSelect)="onDeSelect($event, 2)">
+                            </ng-multiselect-dropdown>
+                        </div>
+                    </div>
+                    <div *ngIf="bannerFor == '3'" class="category-banner">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Category</label>
+                                    <select name="category" class="form-control" [(ngModel)]="offerDetails.category"
+                                        (change)="onChangeCategory($event.target.value)">
+                                        <option value="">Select Category</option>
+                                        <option *ngFor="let item of categoryList;" value="{{item.item_id}}">
+                                            {{item.item_text}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Sub Category</label>
+                                    <select name="SubCategory" class="form-control"
+                                        [(ngModel)]="offerDetails.subCategory"
+                                        (change)="onChangeSubCategory($event.target.value)">
+                                        <option value="">Select Sub Category</option>
+                                        <option *ngFor="let item of subCategories;" value="{{item.item_id}}">
+                                            {{item.item_text}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Product</label>
+                            <ng-multiselect-dropdown [placeholder]="'Select Products'" [data]="productList"
+                                [(ngModel)]="selectedProduct" name="productList" [settings]="dropDownSetting"
+                                (onSelect)="onItemSelect($event, 3)" (onDeSelect)="onDeSelect($event, 3)">
+                            </ng-multiselect-dropdown>
+                        </div>
+                    </div>
+                    <div *ngIf="bannerFor == '4'" class="category-banner">
+                        <div class="form-group">
+                            <label>Brand</label>
+                            <ng-multiselect-dropdown [placeholder]="'Select Brand'" [data]="brandList"
+                                [(ngModel)]="selectedBrand" [ngModelOptions]="{standalone: true}"
+                                [settings]="dropDownSetting" (onSelect)="onItemSelect($event, 4)"
+                                (onDeSelect)="onDeSelect($event, 4)">
+                            </ng-multiselect-dropdown>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button *ngIf="!flags.isEdit" type="button" class="btn btn-primary"
+                    [disabled]="!bannerForm.valid || flags.isAdded"
+                    (click)="addBanner()">{{flags.isAdded?'Saving...':'Save'}}</button>
+                <button *ngIf="flags.isEdit" type="button" class="btn btn-primary"
+                    [disabled]="!bannerForm.valid || flags.isUpdate"
+                    (click)="editBanner()">{{flags.isUpdate?'Updating...':'Update'}}</button>
+                <button type="button" class="btn btn-secondary" id="closeBannerModal" (click)="onCancel()"
+                    data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="openBannerModal" data-toggle="modal" data-target="#addEditBannerModal">
+
+
+<!-- <div class="modal" id="bannerDetailModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 *ngIf="selectedBanner" class="modal-title">{{selectedBanner.type.toUpperCase()}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table *ngIf="detailsList.length" class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Image</th>
+                            <th *ngIf="selectedBanner.type == 'subCategory' || selectedBanner.type == 'product'">
+                                Category</th>
+                            <th *ngIf="selectedBanner.type == 'product'">Sub Category</th>
+                            <th>Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of detailsList; let i = index">
+                            <td>{{i + 1}}</td>
+                            <td>
+                                <img src="{{imageUrl}}/{{selectedBanner.type == 'product'?item.images[0]:item.image}}"
+                                    width="70px" height="70px">
+                            </td>
+                            <td *ngIf="selectedBanner.type == 'subCategory' || selectedBanner.type == 'product'">
+                                {{item.category.name}}</td>
+                            <td *ngIf="selectedBanner.type == 'product'">{{item.subCategory.name}}</td>
+                            <td>{{item.name}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" data-toggle="modal" data-target="#bannerDetailModal" id="openBannerDetailModal"> -->

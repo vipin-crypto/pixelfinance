@@ -1,0 +1,57 @@
+<div class="container-fluid">
+   
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="m-0 font-weight-bold text-primary">ADD USER</h6>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <button class="btn btn-primary" (click)="history.back()"><span
+                                    class="fas fa-arrow-left"></span> Back</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <form #userForm="ngForm">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Type</label>
+                            <input type="text" name="firstName" maxlength="25" appCharacterOnly
+                                [(ngModel)]="type" class="form-control" required />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Description</label>
+                            <input type="text" name="lastName" maxlength="25" 
+                                [(ngModel)]="Description" class="form-control" required />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Price</label>
+                            <input type="text" name="price" appNumberOnly
+                                [(ngModel)]="price" class="form-control" required />
+                        </div>
+                    </div>
+                   
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-12">
+                        <button class="btn btn-primary" [disabled]="!userForm.valid || flags.isAdded"
+                        (click)="addExpanses()">
+                            <span class="fas fa-save"></span>
+                            {{flags.isAdded?'Saving...':'Save'}}
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

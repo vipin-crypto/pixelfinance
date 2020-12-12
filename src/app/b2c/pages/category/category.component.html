@@ -1,0 +1,72 @@
+<div class="container-fluid">
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <div class="row">
+                <div class="col-md-6">
+                    <h6 class="m-0 font-weight-bold text-primary">CATEGORIES</h6>
+                </div>
+                <div class="col-md-6 text-right">
+                    <button  *ngIf="(role.type=='SubAdmin'&& access.manageCategoryWrite==true)||role.type=='Admin'" class="btn btn-primary" data-toggle="modal" data-target="#addUpdateCategoryModal"><span
+                            class="fas fa-plus mr-1"></span> Add</button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Category Id</th>
+                            <th>Country</th>
+                            <th>Discount</th>
+                            <!-- <th>Discount Type</th> -->
+                            <th>Is Upto</th>
+                            <th>Created Date</th>
+                            <th *ngIf="(role.type=='SubAdmin' && (access.manageCategoryWrite==true || access.manageCategoryDelete==true))||role.type=='Admin'">Action</th>
+
+                        </tr>
+                    </thead>
+                    <div class="progress-loader" [hidden]="!loading">
+                        <mat-progress-spinner class="spinner" [color]="color" mode="indeterminate">
+                        </mat-progress-spinner>
+                    </div>
+                    <tbody>
+                        <tr *ngFor="let item of categoryList; let i = index">
+                            <td>{{ i + serialNumber + 1}} </td>
+                            <td>
+                                <img [src]="imageurl+item.image" width="70px" height="70px">
+                            </td>
+                            <td>{{item.name}}</td>
+                            <td>{{item._id}}</td>
+                            <td>{{item.country}}</td>
+                            <td>{{item.discount}}({{item.type}})</td>
+                            <!-- <td>{{item.type}}</td> -->
+                            <td>
+                                <ui-switch labelOn="ON" switchColor="#4e73df" id="recommend" [(ngModel)]="item.isUpto"
+                                    name="isRecommended" (change)="changeStatus($event,item)"labelOff="OFF"></ui-switch>
+                            </td>              
+                            <td>{{item.createdAt | date: 'yyyy-MM-dd'}} </td>
+                            <td  *ngIf="(role.type=='SubAdmin' && access.manageCategoryWrite == true)||(role.type=='SubAdmin' && access.manageCategoryDelete == true)||role.type=='Admin'">
+                                <div class="product_action" >
+                                    <button  *ngIf="(role.type=='SubAdmin'&& access.manageCategoryWrite==true)||role.type=='Admin'" class="btn btn-primary mr-1"
+                                        (click)="modalComponent.onEditSelect(item)"><span
+                                            class="fas fa-fw fa-edit"></span></button>
+                                    <button *ngIf="(role.type=='SubAdmin'&& access.manageCategoryDelete==true)||role.type=='Admin'" class="btn btn-danger" (click)="deleteCategory(item._id)"><span
+                                            class="fas fa-fw fa-trash"></span></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h4 *ngIf="!categoryList?.length" class="text-center">No records found.</h4>
+            </div>
+            <pagination [totalItems]="totalItems" [maxSize]="05" [(ngModel)]="currentPage"
+                (pageChanged)="pageChange($event)"></pagination>
+        </div>
+    </div>
+</div>
+<app-categorymodal [isEdit]="flags.isEdit" (onAddEdit)="getallCategories()"></app-categorymodal>

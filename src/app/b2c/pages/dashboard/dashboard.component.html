@@ -1,0 +1,274 @@
+<div class="container-fluid">
+    <div class="row">
+        <!-- Earnings (Monthly) Card Example [hidden]="role.type=='Vendor' || role.type == 'Super Admin'"
+[hidden]="role.type=='Vendor' || role.type == 'Super Admin'"
+[hidden]="role.type=='Vendor' || role.type == 'Super Admin'" -->
+        <div  class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body" routerLink="/b2c/sub-admin">
+                    <div class="row no-gutters align-items-center" >
+                        <div class="col mr-2">
+                            <div class="text-xl font-weight-bold text-primary text-uppercase mb-1">Browers
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{borrower}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-users fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Earnings (Monthly) Card Example -->
+        <div  class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success expans shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center" routerLink="/b2c/users">
+                        <div class="col mr-2">
+                            <div class="text-xl font-weight-bold text-success text-uppercase mb-1">Expanses
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">1850  ₹ </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            <!-- <img src="assets/img/category.png" alt=""> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div  class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center" routerLink="/b2c/sub-category">
+                        <div class="col mr-2">
+                            <div class="text-xl font-weight-bold text-info text-uppercase mb-1">Pending</div>
+                            <div class="row no-gutters align-items-center">
+                                <div class="col-auto">
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">9000  ₹ </div>
+                                </div>
+                               
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pending Requests Card Example [hidden]="role.type == 'Super Admin'"
+[hidden]="role.type == 'Super Admin'" -->
+        <!-- <div  class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center" routerLink="/b2c/products">
+                        <div class="col mr-2">
+                            <div class="text-xl font-weight-bold text-warning text-uppercase mb-1">
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{totalProduct}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+
+        <!-- Earnings (Monthly) Card Example -->
+        <!-- <div  class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center" routerLink="/b2c/order">
+                        <div class="col mr-2">
+                            <div class="text-xl font-weight-bold text-success text-uppercase mb-1">Orders
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{totalOrder}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+<!-- superAdmin card   [hidden]="role.type == 'Admin' || role.type == 'Vendor'"
+[hidden]="role.type == 'Admin' || role.type == 'Vendor'"
+[hidden]="role.type == 'Admin' || role.type == 'Vendor'"
+[hidden]="role.type == 'Admin' || role.type == 'Vendor'"
+[hidden]="role.type == 'Admin' || role.type == 'Vendor'"
+[hidden]="role.type == 'Admin' || role.type == 'Vendor'"
+[hidden]="role.type == 'Admin' || role.type == 'Vendor'"-->
+<div  class="col-xl-3 col-md-6 mb-4" *ngIf="role == 'SAdmin'">
+    <div  class="card border-left-success branch shadow h-100 py-2">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center" routerLink="/b2c/admin">
+                <div class="col mr-2">
+                    <div  class="text-xl font-weight-bold text-success branch text-uppercase mb-1">Branches
+                    </div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{admincount}}</div>
+                </div>
+                <div class="col-auto">
+                    <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div  class="col-xl-3 col-md-6 mb-4">
+    <div class="card border-left-success loan shadow h-100 py-2">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center" routerLink="/b2c/vendors">
+                <div class="col mr-2">
+                    <div class="text-xl font-weight-bold text-success loan text-uppercase mb-1">Loans
+                    </div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{loanamount}}  ₹ </div>
+                </div>
+                <div class="col-auto">
+                    <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div  class="col-xl-3 col-md-6 mb-4">
+    <div class="card border-left-success shadow h-100 py-2">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center" routerLink="/b2c/order">
+                <div class="col mr-2">
+                    <div class="text-xl font-weight-bold text-success text-uppercase mb-1">Orders
+                    </div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{totalOrder}}</div>
+                </div>
+                <div class="col-auto">
+                    <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+<div  class="col-xl-3 col-md-6 mb-4">
+    <div class="card border-left-success shadow h-100 py-2">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center" >
+                <div class="col mr-2">
+                    <div class="text-xl font-weight-bold text-success profit text-uppercase mb-1">Total Profit
+                    </div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">10,000  ₹ </div>
+                </div>
+                <div class="col-auto">
+                    <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+
+    <div class="row" *ngIf="role == 'SAdmin'">
+        <div class="col-lg-4 mb-4">
+            <div  class="">
+                <div style="padding-bottom: 4.5rem!important;" class="card border-left-success shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center" routerLink="/b2c/order">
+                            <div class="col mr-2">
+                                <div class="text-xl font-weight-bold text-success text-uppercase mb-1">Branch 1
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    <div style="display: block">
+                                        <canvas mdbChart
+                                            [chartType]="chartType"
+                                            [datasets]="chartDatasets"
+                                            [labels]="chartLabels"
+                                            [colors]="chartColors"
+                                            [options]="chartOptions"
+                                            [legend]="true"
+                                            (chartHover)="chartHovered($event)"
+                                            (chartClick)="chartClicked($event)">
+                                        </canvas>
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div  class="">
+                <div style="padding-bottom: 4.5rem!important;" class="card border-left-success shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center" routerLink="/b2c/order">
+                            <div class="col mr-2">
+                                <div class="text-xl font-weight-bold text-success text-uppercase mb-1">Branch 2
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    <div style="display: block">
+                                        <canvas mdbChart
+                                            [chartType]="chartType"
+                                            [datasets]="chartDataAdmin"
+                                            [labels]="chartLabels"
+                                            [colors]="chartColors"
+                                            [options]="chartOptions"
+                                            [legend]="true"
+                                            (chartHover)="chartHovered($event)"
+                                            (chartClick)="chartClicked($event)">
+                                        </canvas>
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div  class="">
+                <div style="padding-bottom: 4.5rem!important;" class="card border-left-success shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center" routerLink="/b2c/order">
+                            <div class="col mr-2">
+                                <div class="text-xl font-weight-bold text-success text-uppercase mb-1">Branch 3
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    <div style="display: block">
+                                        <canvas mdbChart
+                                            [chartType]="chartType"
+                                            [datasets]="chartDataBranch"
+                                            [labels]="chartLabels"
+                                            [colors]="chartColors"
+                                            [options]="chartOptions"
+                                            [legend]="true"
+                                            (chartHover)="chartHovered($event)"
+                                            (chartClick)="chartClicked($event)">
+                                        </canvas>
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="row">
+    <fusioncharts  [type]="type" [width]="width" [height]="height" [dataSource]="dataSource"></fusioncharts>
+    
+    <div *ngIf="saleData" style="border-top:1px solid black;margin-top:10px">
+        <fusioncharts width="100%" height="400" type="Column2d"  dataFormat="json" [dataSource]="areaData"></fusioncharts>
+    </div>
+     
+</div> -->
